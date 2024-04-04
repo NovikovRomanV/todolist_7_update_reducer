@@ -72,7 +72,7 @@ export function TodolistWithRedux({todolistID}: PropsType) {
     const updateTodolisHandler = (title: string) => {
         dispatch(changeTodolistTitleAC(todolistID, title))
     }
-
+ console.log(todolistID)
     return <div>
         <h3>
             <EditableSpan title={title} addTitleHandler={updateTodolisHandler}/>

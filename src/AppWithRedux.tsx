@@ -4,7 +4,7 @@ import {Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from "./AddItemForm";
 import {Container, Grid, Paper} from "@mui/material";
-import { ButtonAppBar } from './ButtonAppBar';
+import {ButtonAppBar} from './ButtonAppBar';
 import {
     addTaskAC,
     addTodolistTaskHandlerAC,
@@ -20,9 +20,10 @@ import {
     deletTodolistAC,
     TodolistReducer
 } from "./state/TodolistReducer";
-import {useDispatch, useSelector } from 'react-redux';
-import { AppRootStateType } from './state/Store';
-import { TodolistWithRedux } from './TodolistWithRedux';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppRootStateType} from './state/Store';
+import {TodolistWithRedux} from './TodolistWithRedux';
+
 export type TaskType = {
     id: string
     title: string
@@ -32,13 +33,14 @@ export type TaskType = {
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TasksType = {
-   [key: string]: TaskType[]
+    [key: string]: TaskType[]
 }
 export type TodolistType = {
     id: string
     title: string
     filter: string
 }
+
 function AppWithRedux() {
     const todolistId1 = v1();
     const todolistId2 = v1();
@@ -67,7 +69,7 @@ function AppWithRedux() {
     // ])
 
     const todolists = useSelector<AppRootStateType, TodolistType[]>(state => state.todolists)
-    const tasks = useSelector<AppRootStateType, TasksType>(state => state.tasks)
+    // const tasks = useSelector<AppRootStateType, TasksType>(state => state.tasks)
     const dispatch = useDispatch()
 
     function removeTask(todolistId: string, id: string) {
@@ -102,7 +104,8 @@ function AppWithRedux() {
     const deletTodolist = (todolistId: string) => {
         // setTodolists(todolists.filter(el => el.id !== todolistId))
         dispatch(deletTodolistAC(todolistId))
-        delete tasks[todolistId]
+
+        // delete tasks[todolistId]
     }
     const addTodolistHandler = (newTask: string) => {
         const newID = v1()
@@ -128,25 +131,16 @@ function AppWithRedux() {
 
             <ButtonAppBar/>
             <Container fixed>
-                <Grid container style={{padding:'20px'}}>
+                <Grid container style={{padding: '20px'}}>
                     <AddItemForm onClick={addTodolistHandler}/>
                 </Grid>
                 <Grid container spacing={3}>
                     {todolists.map((el) => {
-                        let tasksForTodolist = tasks[el.id];
-
-                        if (el.filter === "active") {
-                            tasksForTodolist = tasks[el.id].filter(t => !t.isDone);
-                        }
-                        if (el.filter === "completed") {
-                            tasksForTodolist = tasks[el.id].filter(t => t.isDone);
-                        }
                         return (
                             <Grid item>
-                                <Paper style={{padding:'10px'}}>
+                                <Paper style={{padding: '10px'}}>
                                     <TodolistWithRedux
-                                            key={el.id}
-                                            todolistID={el.id}
+                                        todolistID={el.id}
                                     />
                                 </Paper>
                             </Grid>
