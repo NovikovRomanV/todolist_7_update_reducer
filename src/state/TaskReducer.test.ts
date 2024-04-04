@@ -7,13 +7,15 @@ import {
     removeTaskAC,
     TaskReducer
 } from "./TaskReducer";
-import {TasksType} from "../App";
+import {TasksType} from "../AppWithRedux";
 
 let tasks: TasksType
-const todolistId1: string = v1();
-const todolistId2: string = v1();
+let todolistId1: string
+let todolistId2: string
 
 beforeEach(()=>{
+    todolistId1 = v1();
+    todolistId2 = v1();
     tasks = {
         [todolistId1]: [
             {id: '1', title: "HTML&CSS", isDone: true},
@@ -62,3 +64,4 @@ test('should be change task title', () => {
     expect(tasksCopy[todolistId2][0].title).toBe('TS')
     expect(tasksCopy[todolistId2].length).toBe(3)
 })
+

@@ -1,7 +1,9 @@
 import {TasksType} from "../App";
 import {v1} from "uuid";
 
-export const TaskReducer = (state:TasksType, action: TaskReducerType):TasksType => {
+const initialState: TasksType = {}
+
+export const TaskReducer = (state= initialState, action: TaskReducerType):TasksType => {
     switch (action.type) {
         case 'REMOVE-TASK':{
             let filteredTasks = state[action.payload.todolistId].filter(t => t.id !== action.payload.id);
