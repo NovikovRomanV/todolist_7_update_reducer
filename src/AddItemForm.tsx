@@ -2,12 +2,14 @@ import s from "./Todolist.module.css";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { memo } from "react";
 
 type PropsType = {
     onClick: (title: string) => void
 }
 
-export const AddItemForm = (props:PropsType) => {
+export const AddItemForm = memo((props:PropsType) => {
+    console.log('AddItemForm')
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -71,4 +73,4 @@ export const AddItemForm = (props:PropsType) => {
         </div>
     )
 
-}
+})

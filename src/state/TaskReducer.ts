@@ -33,6 +33,7 @@ export const TaskReducer = (state= initialState, action: TaskReducerType):TasksT
     }
 }
 
+
 type TaskReducerType = RemoveTaskType | AddTask | ChangeIsDoneType | AddTodolistHandlerType | ChangeTaskTitleType | DeleteTaskType
 
 type RemoveTaskType = ReturnType<typeof removeTaskAC>

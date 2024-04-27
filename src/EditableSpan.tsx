@@ -6,7 +6,7 @@ type PropsType = {
     addTitleHandler: (title: string)=>void
 }
 
-export const EditableSpan = (props: PropsType) => {
+export const EditableSpan = React.memo((props: PropsType) => {
     const [title, setTitle] = useState(props.title)
     const [edit, setEdit] = useState(false)
 
@@ -19,9 +19,10 @@ export const EditableSpan = (props: PropsType) => {
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
+    console.log(title)
   return(
       edit ?
        <input value={title} onBlur={editChange} onChange={onChangeHandler} autoFocus />
       :<span onDoubleClick={editChange}>{title}</span>
   )
-}
+})
